@@ -31,8 +31,7 @@ class GoogleSheet {
             });
             return values;
         } catch (error) {
-            console.log(error);
-            return error;
+            throw error
         }
     }
     async getSheets(spreadsheetId = this.spreadSheetId) {
@@ -42,7 +41,7 @@ class GoogleSheet {
             } = await this.spreadsheets.get({ spreadsheetId });
             return sheets;
         } catch (error) {
-            throw new Error(error);
+            throw error
         }
     }
 
@@ -66,11 +65,10 @@ class GoogleSheet {
             });
             return replies;
         } catch (error) {
-            throw new Error(error);
+            throw error
         }
     }
     // provide rows, and range respectively.
-    // valueInputOption defaults to "USER_ENTERED", however can be updated to RAW, INPUT_VALUE_OPTION_UNSPECIFIED read docs for more info
     async appendRow(values, range, valueInputOption = "USER_ENTERED") {
         try {
             const { updates } = (
@@ -83,7 +81,7 @@ class GoogleSheet {
             ).data;
             return updates;
         } catch (error) {
-            throw new Error(error);
+            throw error
         }
     }
 
@@ -96,8 +94,7 @@ class GoogleSheet {
             });
             return data;
         } catch (err) {
-            console.log(err);
-            return err;
+            throw err
         }
     }
 
@@ -111,8 +108,7 @@ class GoogleSheet {
             });
             return data;
         } catch (err) {
-            console.log(err);
-            return err;
+            throw err
         }
     }
 
@@ -121,8 +117,7 @@ class GoogleSheet {
             const rows = await this.getRows(range, spreadsheetId);
             return this.convertRowsToObject(rows);
         } catch (error) {
-            console.log(`Error on getObjectData`, error);
-            return error;
+            throw error
         }
     }
 
